@@ -16,41 +16,11 @@ import java.util.Random;
 @RestController
 public class HelloController {
 
-    private List<Book> books = new ArrayList<>();
-
     @GetMapping(value = "/hello")
     public String hello() {
         return "Привет, как дела, как жизнь?";
     }
 
-    @GetMapping(value = "/add")
-    public void add() {
-        Random random = new Random();
-        int id = random.nextInt();
-        Book book = new Book(id, "Чистый код");
-        books.add(book);
-    }
-
-    @GetMapping(value = "/show")
-    public List<Book> show() {
-        return books;
-    }
-
-    @GetMapping(value = "/book/{id}")
-    public Book getBook(@PathVariable(value = "id") Integer id) {
-        return books.get(id);
-    }
-
-    @DeleteMapping(value = "/book/{id}")
-    public void deleteBook(@PathVariable(value = "id") Integer id) {
-        int number = id;
-        books.remove(number);
-    }
-
-    @PutMapping(value = "/book/{id}")
-    public void updateBook(@PathVariable(value = "id") Integer id, @RequestBody Book book) {
-        books.set(id, book);
-    }
 
     @GetMapping(value = "/calculator")
     public Integer calculate(@RequestParam(name = "first") Integer a, @RequestParam(name = "second") Integer b) {
@@ -69,10 +39,6 @@ public class HelloController {
         return "Привет всем";
     }
 
-    @PostMapping(value = "/book/add")
-    public void addNewBook(@RequestBody Book book) {
-        books.add(book);
-    }
 
 
 
