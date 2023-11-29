@@ -1,8 +1,10 @@
 package de.telran.firstspringproject3;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +41,16 @@ public class HelloController {
         return books.get(id);
     }
 
+    @DeleteMapping(value = "/book/{id}")
+    public void deleteBook(@PathVariable(value = "id") Integer id) {
+        int number = id;
+        books.remove(number);
+    }
+
+    @PutMapping(value = "/book/{id}")
+    public void updateBook(@PathVariable(value = "id") Integer id, @RequestBody Book book) {
+        books.set(id, book);
+    }
 
     @GetMapping(value = "/calculator")
     public Integer calculate(@RequestParam(name = "first") Integer a, @RequestParam(name = "second") Integer b) {
@@ -61,6 +73,7 @@ public class HelloController {
     public void addNewBook(@RequestBody Book book) {
         books.add(book);
     }
+
 
 
 }
